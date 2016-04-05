@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="euclid">
+      <UniqueIdentifier>{c9fe153a-95d4-432e-9dd1-fae5b8f2c0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="euclid\common">
+      <UniqueIdentifier>{32de9666-e2f8-4500-a9aa-6a01391312d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="euclid\vector">
+      <UniqueIdentifier>{df7f2b57-81c1-405e-8329-d0c3dba5426c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="euclid\vector\expression">
+      <UniqueIdentifier>{1e32e18b-547a-4f99-bb4c-f828d3af60ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="euclid\vector\operator">
+      <UniqueIdentifier>{838a881c-e34e-477b-81ef-9e67498c42c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\euclid\common\types.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\expression.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_expression.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_complexity.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_forward.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\utilities.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_placeholder.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_binary.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_proxy.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_reduce_binary.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_reduce_unary.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_scalar.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_unary.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_honmono.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector.hpp">
+      <Filter>euclid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common.hpp">
+      <Filter>euclid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_operator.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\traits.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\mpl.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\std_extend.hpp">
+      <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\vector_functional.hpp">
+      <Filter>euclid\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\expression\vector_expression_detail.hpp">
+      <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test\test_dummy.cpp" />
+  </ItemGroup>
+</Project>
