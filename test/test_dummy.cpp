@@ -1,5 +1,21 @@
 #include <euclid/vector.hpp>
 
+template <typename T1 ,typename T2>
+struct addition_traits
+{
+	using type = decltype(std::declval<T1>() + std::declval<T2>());
+};
+
+template <typename T>
+struct addition
+{
+	using result_type = T;
+	inline constexpr result_type operator() (T const& lhs, T const& rhs) const noexcept
+	{
+		return lhs + rhs;
+	}
+};
+
 int main(void)
 {
 	using namespace euclid::placehodler;
@@ -11,5 +27,6 @@ int main(void)
 	euclid::vector<float, 4> u = w;
 	u(_r, _g, _b) = x;
 	u(_b, _g, _r) = x;
+
 	return 0;
 }

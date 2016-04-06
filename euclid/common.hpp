@@ -8,3 +8,4 @@
 #include "common/traits.hpp"
 #include "common/utilities.hpp"
 #include "common/std_extend.hpp"
+#include "common/funtional.hpp"

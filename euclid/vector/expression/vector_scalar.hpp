@@ -2,7 +2,7 @@
 
 namespace euclid
 {
-	template <typename Expr, typename T, typename Func>
+	template <typename Expr, typename T, template <typename> class Func>
 	class vector_scalar : public vector_expression<vector_scalar<Expr, T, Func>>
 	{
 		using traits_t = vector_expression_traits<Expr>;

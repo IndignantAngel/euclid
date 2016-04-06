@@ -2,7 +2,7 @@
 
 namespace euclid
 {
-	template <typename LExpr, typename RExpr, typename Func>
+	template <typename LExpr, typename RExpr, template <typename, typename> class Func>
 	class vector_reduce_binary : public scalar_expression<vector_reduce_binary<LExpr, RExpr, Func>>
 	{
 		using left_traits = vector_expression<LExpr>;

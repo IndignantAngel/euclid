@@ -2,11 +2,17 @@
 
 namespace std
 {
-	template <typename T, size_t N, typename Base>
-	struct tuple_size<euclid::vector<T, N, Base>>
+	//template <typename T, size_t N, typename Base>
+	//struct tuple_size<euclid::vector<T, N, Base>>
+	//{
+	//	static constexpr size_t value =
+	//		euclid::vector<T, N, Base>::size();
+	//};
+
+	template <typename Expr>
+	struct tuple_size<euclid::vector_expression<Expr>>
 	{
-		static constexpr size_t value =
-			euclid::vector<T, N, Base>::size();
+		static constexpr size_t value = Expr::size();
 	};
 
 	template <typename T, size_t N>

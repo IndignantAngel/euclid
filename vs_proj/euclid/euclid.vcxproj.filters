@@ -27,9 +27,6 @@
     <ClInclude Include="..\..\euclid\vector\vector_expression.hpp">
       <Filter>euclid\vector</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\euclid\vector\vector_complexity.hpp">
-      <Filter>euclid\vector</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\euclid\vector\vector_forward.hpp">
       <Filter>euclid\vector</Filter>
     </ClInclude>
@@ -83,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="..\..\euclid\vector\expression\vector_expression_detail.hpp">
       <Filter>euclid\vector\expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\common\funtional.hpp">
+      <Filter>euclid\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

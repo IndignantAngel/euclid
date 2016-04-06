@@ -77,6 +77,8 @@ namespace euclid
 			return get_expression(e_).get<index>();
 		}
 
+		using base_type::operator();
+
 	private:
 		sub_base_expression_t&	e_;
 	};

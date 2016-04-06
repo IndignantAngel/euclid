@@ -74,12 +74,12 @@ namespace euclid
 		}
 
 		// operator index
-		const_reference operator[] (size_t const index) const noexcept
+		const_reference operator() (size_t const index) const noexcept
 		{
 			return data_[index];
 		}
 
-		reference operator[] (size_t index) noexcept
+		reference operator() (size_t index) noexcept
 		{
 			return data_[index];
 		}
@@ -110,6 +110,8 @@ namespace euclid
 			return data_.data();
 		}
 		/// data
+
+		using base_type::operator();
 
 	private:
 		array_type		data_;

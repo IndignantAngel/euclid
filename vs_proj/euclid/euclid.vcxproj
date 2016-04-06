@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\euclid\common.hpp" />
     <ClInclude Include="..\..\euclid\common\expression.hpp" />
+    <ClInclude Include="..\..\euclid\common\funtional.hpp" />
     <ClInclude Include="..\..\euclid\common\mpl.hpp" />
     <ClInclude Include="..\..\euclid\common\std_extend.hpp" />
     <ClInclude Include="..\..\euclid\common\traits.hpp" />
@@ -167,7 +168,6 @@
     <ClInclude Include="..\..\euclid\vector\expression\vector_reduce_unary.hpp" />
     <ClInclude Include="..\..\euclid\vector\expression\vector_scalar.hpp" />
     <ClInclude Include="..\..\euclid\vector\expression\vector_unary.hpp" />
-    <ClInclude Include="..\..\euclid\vector\vector_complexity.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_expression.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_forward.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_functional.hpp" />

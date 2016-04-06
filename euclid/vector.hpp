@@ -4,7 +4,6 @@
 #include "vector/vector_forward.hpp"
 #include "common.hpp"
 #include "vector/vector_placeholder.hpp"
-#include "vector/vector_complexity.hpp"
 #include "vector/vector_expression.hpp"
 #include "vector/vector_functional.hpp"
 

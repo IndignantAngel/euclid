@@ -13,20 +13,20 @@ namespace euclid
 		template <typename Expr, typename Tuple, size_t ... Indices>
 		inline void fill_impl_memberwise(vector_expression<Expr>& e, Tuple&& tuple, std::index_sequence<Indices...>) noexcept
 		{
-			auto swallow = { get_expression(e)[Indices] = std::get<Indices>(std::forward<Tuple>(tuple)) ... };
+			auto swallow = { get_expression(e).get<Indices>() = std::get<Indices>(std::forward<Tuple>(tuple)) ... };
 		}
 
 		template <typename Expr, typename Tuple>
 		inline void fill_impl_memberwise(vector_expression<Expr>& e, Tuple&& tuple, vector_fill_tag_tuple) noexcept
 		{
 			fill_impl_memberwise(e, std::forward<Tuple>(tuple),
-				std::make_index_sequence<std::tuple_size<Expr>::value>{});
+				std::make_index_sequence<std::tuple_size<vector_expression<Expr>>::value>{});
 		}
 
 		template <typename Expr, typename T>
 		inline void fill_impl_memberwise(vector_expression<Expr>& e, T&& t, vector_fill_tag_to_tuple) noexcept
 		{
-			fill_impl_memberwise(e, make_uniform_tuple<std::tuple_size<Expr>::value>(std::forward<T>(t)), vector_fill_tag_tuple{});
+			fill_impl_memberwise(e, make_uniform_tuple<std::tuple_size<vector_expression<Expr>>::value>(std::forward<T>(t)), vector_fill_tag_tuple{});
 		}
 
 		template <typename Expr, typename T>
@@ -61,20 +61,20 @@ namespace euclid
 
 			fill_impl(e, std::forward<T>(t), std::conditional_t<
 				and<
-					or <std::is_same<type, uint8_t>, std::is_same<type, int8_t>>,
-					std::is_same<type, typename Expr::value_type>
+				or <std::is_same<type, uint8_t>, std::is_same<type, int8_t>>,
+				std::is_same<type, typename Expr::value_type>
 				>::value,
 				vector_fill_tag_memset, vector_fill_tag_memberwise> {}
 			);
 		}
 	}
 
+	/// vector fill
 	template <typename Expr, typename T>
 	inline void fill(vector_expression<Expr>& e, T&& t) noexcept
 	{
 		detail::fill_impl(e, std::forward<T>(t));
 	}
-	/// fill
 
 	// vector assign
 	namespace detail
@@ -147,9 +147,9 @@ namespace euclid
 		{
 			assign_impl_style_select(lhs, rhs,
 				std::conditional_t<and<
-					size_equal<RExpr::complexity(), 0>,
-					size_equal<LExpr::complexity(), 0>,
-					std::is_same<typename LExpr::value_type, typename RExpr::value_type>
+				size_equal<RExpr::complexity(), 0>,
+				size_equal<LExpr::complexity(), 0>,
+				std::is_same<typename LExpr::value_type, typename RExpr::value_type>
 				>::value, vector_assign_tag_memcpy, vector_assign_tag_memberwise>{});
 		}
 
@@ -158,15 +158,62 @@ namespace euclid
 		{
 			assign_impl_complexity(lhs, rhs,
 				std::conditional_t<size_greater_than<RExpr::complexity(), 1>::value,
-					vector_assign_tag_complex, vector_assign_tag_simple>{});
+				vector_assign_tag_complex, vector_assign_tag_simple>{});
 		}
 	}
 
+	/// vector assign
 	template<typename LExpr, typename RExpr>
 	auto assign(vector_expression<LExpr>& lhs, vector_expression<RExpr> const& rhs) noexcept
 		-> std::enable_if_t<size_equal<LExpr::size(), RExpr::size()>::value>
 	{
 		detail::assign_impl(lhs, rhs);
 	}
-	/// vector assign
+
+	/// vector_binary_function
+	template <typename LExpr, typename RExpr, template <typename, typename> class ScalarFunc>
+	struct vector_binary_function
+	{
+		using scalar_functor_t = ScalarFunc<typename LExpr::value_type, typename RExpr::value_type>;
+		using first_argument_type = LExpr;
+		using second_argument_type = RExpr;
+		using result_type = typename scalar_functor_t::result_type;
+
+		template <size_t Index>
+		result_type get(first_argument_type& lhs, second_argument_type& rhs) const noexcept
+		{
+			return scalar_functor_t{}(lhs.get<Index>(), rhs.get<Index>());
+		}
+
+		result_type operator() (first_argument_type& lhs, second_argument_type& rhs, size_t index) const noexcept
+		{
+			return scalar_functor_t{}(lhs(index), rhs(index));
+		}
+	};
+
+	/// vector_addition
+	template <typename LExpr, typename RExpr>
+	using vector_addition = vector_binary_function<LExpr, RExpr, scalar_addition>;
+
+	/// vector_subtraction
+	template <typename LExpr, typename RExpr>
+	using vector_subtraction = vector_binary_function<LExpr, RExpr, scalar_subtraction>;
+
+	/// vector_multiplication
+	template <typename LExpr, typename RExpr>
+	using vector_multiplication = vector_binary_function<LExpr, RExpr, scalar_multiplication>;
+
+	/// is there any need for division?
+
+	namespace detail
+	{
+
+	}
+
+	/// cross production for vector
+	template <typename LExpr, typename RExpr>
+	struct vector_cross
+	{
+
+	};
 }

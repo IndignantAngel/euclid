@@ -17,18 +17,18 @@ namespace euclid
 	template <typename Expr, typename Indices>
 	class vector_proxy;
 
-	template <typename Expr, typename Func>
+	template <typename Expr, template <typename> class Func>
 	class vector_unary;
 
-	template <typename LExpr, typename RExpr, typename Func>
+	template <typename LExpr, typename RExpr, template <typename, typename> class Func>
 	class vector_binary;
 
-	template <typename Expr, typename T, typename Func>
+	template <typename Expr, typename T, template <typename> class Func>
 	class vector_scalar;
 
-	template <typename Expr, typename Func>
+	template <typename Expr, template <typename> class Func>
 	class vector_reduce_unary;
 
-	template <typename LExpr, typename RExpr, typename Func>
+	template <typename LExpr, typename RExpr, template <typename, typename> class Func>
 	class vector_reduce_binary;
 }
