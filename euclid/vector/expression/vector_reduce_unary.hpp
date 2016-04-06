@@ -6,6 +6,6 @@ namespace euclid
 	class vector_reduce_unary : public scalar_expression<vector_reduce_unary<Expr, Func>>
 	{
 		using traits_t = vector_expression_traits<Expr>;
-		static_assert(traits_t::value, "Not a valid vector expression!");
+		static_assert(traits_t::is_valid, "Not a valid vector expression!");
 	};
 }

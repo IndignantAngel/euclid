@@ -3,3 +3,4 @@
 *.VC.opendb
 x64
 .suo
+*.user

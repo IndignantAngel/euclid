@@ -126,29 +126,4 @@ namespace euclid
 	template <size_t Val>
 	using size_decrement = subtract<size_t, Val, 1>;
 	/// subtract
-
-	// argument
-	// arguments get helper
-	template <size_t Index>
-	struct argument
-	{
-		template <typename Arg0, typename ... Args>
-		static auto get(Arg0 arg0, Args ... args)
-			-> decltype(argument<Index - 1>::get(args...))
-		{
-			return argument<Index - 1>::get(args...);
-		}
-	};
-
-	template <>
-	struct argument<0>
-	{
-		template <typename Arg0, typename ... Args>
-		static Arg0 get(Arg0 arg0, Args ... args)
-		{
-			return arg0;
-		}
-	};
-	/// argument
-
 }

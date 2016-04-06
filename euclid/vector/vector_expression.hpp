@@ -29,7 +29,7 @@ namespace euclid
 	template <typename Expr>
 	struct vector_expression_traits
 	{
-		static constexpr bool value = std::is_base_of<
+		static constexpr bool is_valid = std::is_base_of<
 			vector_expression<Expr>, Expr>::value;
 
 		using base_expression_t = std::conditional_t<

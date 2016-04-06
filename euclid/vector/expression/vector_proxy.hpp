@@ -7,7 +7,7 @@ namespace euclid
 	{
 		using traits_t = vector_expression_traits<Expr>;
 
-		static_assert(traits_t::value, "Not a valid vector expression!");
+		static_assert(traits_t::is_valid, "Not a valid vector expression!");
 		static_assert(size_equal_greater_than<4, Indices::size()>::value, "Proxy size dosen`t match!");
 		static_assert(detail::proxy_indices_valid<Expr, Indices>::value, "Index overflow!");
 	public:
