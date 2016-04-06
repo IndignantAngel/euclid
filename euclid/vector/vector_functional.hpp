@@ -102,7 +102,7 @@ namespace euclid
 			vector_expression<RExpr> const& rhs,
 			std::index_sequence<Indices...>) noexcept
 		{
-			auto swallow = { get_expression(lhs)[Indices] = get_expression(rhs)[Indices] ... };
+			auto swallow = { get_expression(lhs).get<Indices>() = get_expression(rhs).get<Indices>() ... };
 		}
 
 		template <typename LExpr, typename RExpr>
@@ -146,7 +146,9 @@ namespace euclid
 			vector_assign_tag_simple) noexcept
 		{
 			assign_impl_style_select(lhs, rhs,
-				std::conditional_t<and<size_equal<RExpr::complexity(), 0>,
+				std::conditional_t<and<
+					size_equal<RExpr::complexity(), 0>,
+					size_equal<LExpr::complexity(), 0>,
 					std::is_same<typename LExpr::value_type, typename RExpr::value_type>
 				>::value, vector_assign_tag_memcpy, vector_assign_tag_memberwise>{});
 		}
@@ -161,7 +163,8 @@ namespace euclid
 	}
 
 	template<typename LExpr, typename RExpr>
-	void assign(vector_expression<LExpr>& lhs, vector_expression<RExpr> const& rhs) noexcept
+	auto assign(vector_expression<LExpr>& lhs, vector_expression<RExpr> const& rhs) noexcept
+		-> std::enable_if_t<size_equal<LExpr::size(), RExpr::size()>::value>
 	{
 		detail::assign_impl(lhs, rhs);
 	}

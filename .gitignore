@@ -1,0 +1,5 @@
+.vs
+*.sdf
+*.VC.opendb
+x64
+.suo

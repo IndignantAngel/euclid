@@ -6,7 +6,7 @@ namespace euclid
 	class vector : public vector_expression<vector<T, N, Base>>
 	{
 		static_assert(is_numeric<T>::value, "Must be a numeric type!");
-		static_assert(size_equal_greater_than<N, 2>::value && size_equal_greater_than<4, N>::value
+		static_assert(and<size_equal_greater_than<N, 2>, size_equal_less_than<N, 4>>::value
 			, "Illegal demension for vector!");
 	public:
 		using base_type = vector_expression<vector<T, N, Base>>;
@@ -44,7 +44,7 @@ namespace euclid
 		vector(vector const&) noexcept = default;
 
 		// convert construct
-		template <typename Expr, typename = std::enable_if_t<size_equal<Expr::size(), the_size>::value>>
+		template <typename Expr>
 		vector(vector_expression<Expr> const& vec) noexcept
 		{
 			assign(*this, vec);
@@ -53,7 +53,7 @@ namespace euclid
 		// copy assign
 		vector& operator= (vector const&) noexcept = default;
 
-		template <typename Expr, typename = std::enable_if_t<size_equal<Expr::size(), the_size>::value>>
+		template <typename Expr>
 		vector& operator= (vector_expression<Expr> const& vec) noexcept
 		{
 			vector temp = vec;
@@ -110,9 +110,6 @@ namespace euclid
 			return data_.data();
 		}
 		/// data
-
-		// proxy
-		using base_type::operator();
 
 	private:
 		array_type		data_;

@@ -30,7 +30,15 @@ namespace euclid
 		vector_proxy(sub_base_expression_t& e) noexcept
 			: e_(e)
 		{
+		}
 
+		template <typename OtherExpr>
+		vector_proxy& operator= (vector_expression<OtherExpr> const& e) noexcept
+		{
+			using vector_type = vector<value_type, the_size, base_tag>;
+			vector_type temp = e;
+			assign(*this, temp);
+			return *this;
 		}
 
 		static constexpr size_t size() noexcept
@@ -43,19 +51,31 @@ namespace euclid
 			return proxy_traits::complexity;
 		}
 
-		auto data() noexcept
-			-> std::enable_if_t<proxy_traits::is_lvalue, pointer>
+		template <typename = std::enable_if_t<proxy_traits::is_lvalue>>
+		pointer data() noexcept
+		{
+			return get_expression(e_).data();
+		}
+		
+		template <typename = std::enable_if_t<proxy_traits::is_lvalue>>
+		const_pointer data() const noexcept
 		{
 			return get_expression(e_).data();
 		}
 
-		auto data() const noexcept
-			->std::enable_if_t<proxy_traits::is_lvalue, const_pointer>
+		template <size_t Index>
+		reference get() noexcept
 		{
-			return get_expression(e_).data();
+			// implement nonconst with const
+			return const_cast<reference>(const_cast<vector_proxy const&>(*this).get<Index>());
 		}
 
-		using base_type::operator();
+		template <size_t Index>
+		const_reference get() const noexcept
+		{
+			constexpr auto index = std::get<Index>(Indices{});
+			return get_expression(e_).get<index>();
+		}
 
 	private:
 		sub_base_expression_t&	e_;

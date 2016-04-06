@@ -13,6 +13,7 @@ namespace euclid
 	// detail for vector proxy
 	namespace detail
 	{
+		// is_index_sequence
 		template <typename Indices>
 		struct is_index_sequence : std::false_type {};
 
@@ -23,11 +24,14 @@ namespace euclid
 		struct is_index_sequence<std::index_sequence<M, N, Indices...>>
 		{
 			static constexpr bool value =
-				and< size_equal<size_increment<M>::value, N>,
-				is_index_sequence<std::index_sequence<N, Indices...>>
+				and< 
+					size_equal<size_increment<M>::value, N>,
+					is_index_sequence<std::index_sequence<N, Indices...>>
 				>::value;
 		};
+		/// is_index_sequence
 
+		// proxy_lvalue_traits
 		template <size_t N, size_t ... Is>
 		struct proxy_indices_valid_impl;
 
@@ -54,15 +58,16 @@ namespace euclid
 		template <typename Expr, typename Indices>
 		struct proxy_lvalue_traits
 		{
-			static constexpr size_t complexity =
+			static constexpr bool is_contiguous_memory = is_index_sequence<Indices>::value;
+
+			static constexpr size_t complexity = //Expr::complexity();
 				std::conditional_t<
-				size_equal<Expr::complexity(), 0>::value,
-				std::conditional_t<is_contiguous_memory, std::size_const<0>, std::size_const<1>>,
-				std::size_const<Expr::complexity() >> ::value;
+					size_equal<Expr::complexity(), 0>::value,
+					std::conditional_t<is_contiguous_memory, std::size_const<0>, std::size_const<1>>,
+					std::size_const<Expr::complexity()>>::value;
 
 			static constexpr bool is_lvalue = and<size_equal<complexity, 0>, not<std::is_const<Expr>>>::value;
-
-			static constexpr bool is_contiguous_memory = is_index_sequence<Indices>::value;
 		};
+		/// proxy_lvalue_traits
 	}
 }
