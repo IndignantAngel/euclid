@@ -18,4 +18,5 @@
 #include "vector/expression/vector_reduce_binary.hpp"
 
 // vector operator
+#include "vector/operator/vetor_operator_detail.hpp"
 #include "vector/vector_operator.hpp"

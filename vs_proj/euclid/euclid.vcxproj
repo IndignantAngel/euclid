@@ -168,6 +168,11 @@
     <ClInclude Include="..\..\euclid\vector\expression\vector_reduce_unary.hpp" />
     <ClInclude Include="..\..\euclid\vector\expression\vector_scalar.hpp" />
     <ClInclude Include="..\..\euclid\vector\expression\vector_unary.hpp" />
+    <ClInclude Include="..\..\euclid\vector\functional\vector_assign.hpp" />
+    <ClInclude Include="..\..\euclid\vector\functional\vector_cross.hpp" />
+    <ClInclude Include="..\..\euclid\vector\functional\vector_fill.hpp" />
+    <ClInclude Include="..\..\euclid\vector\functional\vector_simple_functors.hpp" />
+    <ClInclude Include="..\..\euclid\vector\operator\vetor_operator_detail.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_expression.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_forward.hpp" />
     <ClInclude Include="..\..\euclid\vector\vector_functional.hpp" />

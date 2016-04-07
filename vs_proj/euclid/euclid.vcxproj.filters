@@ -16,6 +16,9 @@
     <Filter Include="euclid\vector\operator">
       <UniqueIdentifier>{838a881c-e34e-477b-81ef-9e67498c42c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="euclid\vector\functional">
+      <UniqueIdentifier>{9e208cef-ef4e-45bc-9e88-ffe5021ecd59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\euclid\common\types.hpp">
@@ -83,6 +86,21 @@
     </ClInclude>
     <ClInclude Include="..\..\euclid\common\funtional.hpp">
       <Filter>euclid\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\functional\vector_assign.hpp">
+      <Filter>euclid\vector\functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\functional\vector_fill.hpp">
+      <Filter>euclid\vector\functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\functional\vector_simple_functors.hpp">
+      <Filter>euclid\vector\functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\functional\vector_cross.hpp">
+      <Filter>euclid\vector\functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\euclid\vector\operator\vetor_operator_detail.hpp">
+      <Filter>euclid\vector\operator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
