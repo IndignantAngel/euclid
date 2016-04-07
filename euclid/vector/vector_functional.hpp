@@ -156,9 +156,7 @@ namespace euclid
 		template <typename LExpr, typename RExpr>
 		inline void assign_impl(vector_expression<LExpr>& lhs, vector_expression<RExpr> const& rhs) noexcept
 		{
-			assign_impl_complexity(lhs, rhs,
-				std::conditional_t<size_greater_than<RExpr::complexity(), 1>::value,
-				vector_assign_tag_complex, vector_assign_tag_simple>{});
+			assign_impl_complexity(lhs, rhs, vector_assign_tag_simple{});
 		}
 	}
 
@@ -180,12 +178,12 @@ namespace euclid
 		using result_type = typename scalar_functor_t::result_type;
 
 		template <size_t Index>
-		result_type get(first_argument_type& lhs, second_argument_type& rhs) const noexcept
+		static result_type get(first_argument_type const& lhs, second_argument_type const& rhs) noexcept
 		{
 			return scalar_functor_t{}(lhs.get<Index>(), rhs.get<Index>());
 		}
 
-		result_type operator() (first_argument_type& lhs, second_argument_type& rhs, size_t index) const noexcept
+		result_type operator() (first_argument_type const& lhs, second_argument_type const& rhs, size_t index) const noexcept
 		{
 			return scalar_functor_t{}(lhs(index), rhs(index));
 		}
@@ -226,16 +224,16 @@ namespace euclid
 			scalar_multiplication<first_value_type, second_value_type>::result_type;
 
 		template <size_t Index>
-		result_type get(first_argument_type& lhs, second_argument_type& rhs) const noexcept
+		static result_type get(first_argument_type const& lhs, second_argument_type const& rhs) noexcept
 		{
 			constexpr size_t I = size_mod<size_add<Index, 1>::value, the_size>::value;
-			constexpr size_t I = size_mod<size_add<Index, 2>::value, the_size>::value;
+			constexpr size_t J = size_mod<size_add<Index, 2>::value, the_size>::value;
 
 			return lhs.get<I>() * rhs.get<J>() - lhs.get<J>() * rhs.get<I>();
 		}
 
 		// this kind of access is not effective
-		result_type operator() (first_argument_type& lhs, second_argument_type& rhs, size_t index) const noexcept
+		result_type operator() (first_argument_type const& lhs, second_argument_type const& rhs, size_t index) const noexcept
 		{
 			size_t i = (Index + 1) % the_size;
 			size_t j = (Index + 2) % the_size;
