@@ -126,4 +126,18 @@ namespace euclid
 	template <size_t Val>
 	using size_decrement = subtract<size_t, Val, 1>;
 	/// subtract
+
+	// add & size_add, size_increment
+	template <typename T, T Val, T Mult>
+	struct multiply : std::integral_constant<T, Val * Mult> { };
+	template <size_t Val, size_t Mult>
+	using size_multiply = multiply<size_t, Val, Mult>;
+	template <size_t Val>
+	using size_square = multiply<size_t, Val, Val>;
+
+	template <typename T, T Val, T Mod, typename = 
+		std::enable_if_t<std::is_integral<T>::value>>
+	struct mod : std::integral_constant<T, Val % Mod> {};
+	template <size_t Val, size_t Mod>
+	using size_mod = mod<size_t, Val, Mod>;
 }

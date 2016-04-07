@@ -16,6 +16,11 @@ struct addition
 	}
 };
 
+template <typename T>
+class foo {};
+
+class fee : public foo<fee> {};
+
 int main(void)
 {
 	using namespace euclid::placehodler;
@@ -27,6 +32,8 @@ int main(void)
 	euclid::vector<float, 4> u = w;
 	u(_r, _g, _b) = x;
 	u(_b, _g, _r) = x;
+
+	euclid::vector<float, 3> r = cross(u(_r, _g, _b), u(_b, _g, _r));
 
 	return 0;
 }

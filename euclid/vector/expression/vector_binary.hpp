@@ -20,14 +20,27 @@ namespace euclid
 
 		using functor_type = Func<lsub_expression_t, rsub_expression_t>;
 		using value_type = typename functor_type::result_type;
+		using base_tag = typename lsub_expression_t::base_tag;
 
 	public:
 		vector_binary(
-			lsub_base_expression_t& lhs,
-			rsub_base_expression_t& rhs) noexcept
+			lsub_base_expression_t const& lhs,
+			rsub_base_expression_t const& rhs) noexcept
 			: lhs_(lhs), rhs_(rhs)
 		{
 
+		}
+
+		static constexpr size_t size() noexcept
+		{
+			return lsub_expression_t::size();
+		}
+
+		static constexpr size_t complexity() noexcept
+		{
+			return select<std::greater>(
+				size_multiply<functor_type::complexity(), lsub_expression_t::complexity()>::value,
+				size_multiply<functor_type::complexity(), rsub_expression_t::complexity()>::value);
 		}
 
 		value_type operator() (size_t index) const noexcept
@@ -38,13 +51,13 @@ namespace euclid
 		template <size_t Index>
 		value_type get() const noexcept
 		{
-			return functor_type::get<Index>
+			return functor_type::get<Index>(get_expression(lhs_), get_expression(rhs_));
 		}
 
 		using base_type::operator();
 
 	private:
-		lsub_base_expression_t& lhs_;
-		rsub_base_expression_t& rhs_;
+		lsub_base_expression_t const& lhs_;
+		rsub_base_expression_t const& rhs_;
 	};
 }
