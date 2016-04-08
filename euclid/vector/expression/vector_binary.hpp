@@ -38,17 +38,20 @@ namespace euclid
 
 		static constexpr size_t complexity() noexcept
 		{
-			return 
-				select<std::greater>(
-					select<std::greater>(
-						lsub_expression_t::complexity(),
-						size_multiply<functor_type::complexity(), lsub_expression_t::complexity()>::value
-					),
-					select<std::greater>(
-						rsub_expression_t::complexity(),
-						size_multiply<functor_type::complexity(), rsub_expression_t::complexity()>::value
-					)
-				);
+			//return 
+			//	select<std::greater>(
+			//		select<std::greater>(
+			//			lsub_expression_t::complexity(),
+			//			size_multiply<functor_type::complexity(), lsub_expression_t::complexity()>::value
+			//		),
+			//		select<std::greater>(
+			//			rsub_expression_t::complexity(),
+			//			size_multiply<functor_type::complexity(), rsub_expression_t::complexity()>::value
+			//		)
+			//	);
+			return std::greater<size_t>{}(
+				size_multiply<std::greater<size_t>{}(1, lsub_expression_t::complexity()), functor_type::complexity()>::value,
+				size_multiply<std::greater<size_t>{}(1, rsub_expression_t::complexity()), functor_type::complexity()>::value);
 		}
 
 		value_type operator() (size_t index) const noexcept

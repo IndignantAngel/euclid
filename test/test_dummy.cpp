@@ -32,8 +32,10 @@ int main(void)
 	euclid::vector<float, 4> u = w;
 	u(_r, _g, _b) = x;
 	u(_b, _g, _r) = x;
+	
+	//euclid::vector<float, 3> r = cross(u(_r, _g, _b), u(_b, _g, _r));
 
-	euclid::vector<float, 3> r = cross(u(_r, _g, _b), u(_b, _g, _r));
+	size_t r = cross(u(_r, _g, _b), u(_b, _g, _r)).complexity();
 
 	return 0;
 }

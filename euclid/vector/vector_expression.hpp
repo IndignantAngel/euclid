@@ -9,18 +9,18 @@ namespace euclid
 		using base_type = base_expression<Expr>;
 		using expression_t = typename base_type::expression_t;
 		using const_expression_t = typename base_type::const_expression_t;
-		
+
 	public:
-		template <size_t ... N>
-		auto operator() (vector_placeholder<N> const ...) noexcept
-			-> vector_proxy<expression_t, std::index_sequence<N...>>
+		template <size_t ... Is>
+		auto operator() (vector_placeholder<Is> const ...) noexcept
+			-> vector_proxy<expression_t, std::index_sequence<Is...>>
 		{
 			return { get_expression(*this) };
 		}
 
-		template <size_t ... N>
-		auto operator() (vector_placeholder<N> const ...) const noexcept
-			-> vector_proxy<const_expression_t, std::index_sequence<N...>>
+		template <size_t ... Is>
+		auto operator() (vector_placeholder<Is> const ...) const noexcept
+			-> vector_proxy<const_expression_t, std::index_sequence<Is...>>
 		{
 			return { get_expression(*this) };
 		}

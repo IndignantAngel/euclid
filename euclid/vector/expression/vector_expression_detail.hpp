@@ -60,11 +60,12 @@ namespace euclid
 		{
 			static constexpr bool is_contiguous_memory = is_index_sequence<Indices>::value;
 
-			static constexpr size_t complexity =
-				std::conditional_t<
-					size_equal<Expr::complexity(), 0>::value,
-					std::conditional_t<is_contiguous_memory, std::size_const<0>, std::size_const<1>>,
-					std::size_const<Expr::complexity()>>::value;
+			//static constexpr size_t complexity =
+			//	std::conditional_t<
+			//		size_equal<Expr::complexity(), 0>::value,
+			//		std::conditional_t<is_contiguous_memory, std::size_const<0>, std::size_const<1>>,
+			//		std::size_const<Expr::complexity()>>::value;
+			static constexpr size_t complexity = Expr::complexity();
 
 			static constexpr bool is_lvalue = and<size_equal<complexity, 0>, not<std::is_const<Expr>>>::value;
 		};

@@ -63,7 +63,7 @@ namespace euclid
 			return get_expression(e_).data();
 		}
 
-		template <size_t Index>
+		template <size_t Index, typename = std::enable_if_t<proxy_traits::is_lvalue>>
 		reference get() noexcept
 		{
 			// implement nonconst with const
