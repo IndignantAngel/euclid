@@ -20,6 +20,10 @@ namespace euclid
 
 		using functor_type = Func<lsub_expression_t, rsub_expression_t>;
 		using value_type = typename functor_type::result_type;
+		using reference = typename functor_type::reference;
+		using const_reference = typename functor_type::const_reference;
+		using pointer = typename functor_type::pointer;
+		using const_pointer = typename functor_type::const_pointer;
 		using base_tag = typename lsub_expression_t::base_tag;
 
 	public:
@@ -38,20 +42,8 @@ namespace euclid
 
 		static constexpr size_t complexity() noexcept
 		{
-			//return 
-			//	select<std::greater>(
-			//		select<std::greater>(
-			//			lsub_expression_t::complexity(),
-			//			size_multiply<functor_type::complexity(), lsub_expression_t::complexity()>::value
-			//		),
-			//		select<std::greater>(
-			//			rsub_expression_t::complexity(),
-			//			size_multiply<functor_type::complexity(), rsub_expression_t::complexity()>::value
-			//		)
-			//	);
-			return std::greater<size_t>{}(
-				size_multiply<std::greater<size_t>{}(1, lsub_expression_t::complexity()), functor_type::complexity()>::value,
-				size_multiply<std::greater<size_t>{}(1, rsub_expression_t::complexity()), functor_type::complexity()>::value);
+			return size_multiply<size_greater<1, lsub_expression_t::complexity(),
+				rsub_expression_t::complexity()>::value, functor_type::complexity()>::value;
 		}
 
 		value_type operator() (size_t index) const noexcept

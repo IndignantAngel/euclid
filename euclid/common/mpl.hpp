@@ -110,6 +110,32 @@ namespace euclid
 	using size_increment = add<size_t, Val, 1>;
 	/// add
 
+	// greater
+	template <typename T, T ... Vals>
+	struct greater;
+	template <typename T, T First>
+	struct greater<T, First>
+	{
+		static constexpr T value = First;
+	};
+	template <typename T, T First, T Second, T ... Rests>
+	struct greater<T, First, Second, Rests...>
+	{
+		static constexpr T value = First > Second ?
+			greater<T, First, Rests...>::value : greater<T, Second, Rests...>::value;
+	};
+	template <size_t ... Vals>
+	using size_greater = greater<size_t, Vals...>;
+
+	// less
+	template <typename T, T Lhs, T Rhs>
+	struct less
+	{
+		static constexpr T value = Lhs < Rhs ? Lhs : Rhs;
+	};
+	template <size_t Lhs, size_t Rhs>
+	using size_less = less<size_t, Lhs, Rhs>;
+
 	// subtract & size_subtract, size_decrement
 	template <typename T, T Val, T Sub>
 	struct subtract : std::integral_constant<T, Val - Sub> 
